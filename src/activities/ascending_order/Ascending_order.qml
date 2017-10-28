@@ -54,6 +54,7 @@ ActivityBase {
             property alias bonus: bonus
             property alias boxes: boxes
             property alias flow: flow
+            property alias hints: hints
             property alias container: container
             property alias instruction: instruction
             property real ratio: ApplicationInfo.ratio
@@ -98,7 +99,8 @@ ActivityBase {
             anchors.topMargin: instruction.height * 1.25
             width: parent.width * 0.5
             color: 'white'
-            text: qsTr('Hint: Numbers are ordered as 0,1,2,3,4,5,6,7,8,9')
+            visible: false
+            text: ""
             Rectangle {
                 z: -1
                 opacity: 0.8

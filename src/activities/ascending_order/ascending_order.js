@@ -48,6 +48,7 @@ function start(items_, mode_) {
     if (mode == "alphabets") {
         //: list containing all the characters separated by a "/"
         var letters = qsTr("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z")
+        items.hints.text = letters
         alphabets = letters.split("/")
     }
 
