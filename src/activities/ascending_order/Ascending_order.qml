@@ -88,6 +88,34 @@ ActivityBase {
             }
         }
 
+        GCText {
+            id: hints
+            wrapMode: TextEdit.WordWrap
+            fontSize: tinySize
+            horizontalAlignment: Text.Center
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: instruction.height * 1.25
+            width: parent.width * 0.5
+            color: 'white'
+            text: qsTr('Hint: Numbers are ordered as 0,1,2,3,4,5,6,7,8,9')
+            Rectangle {
+                z: -1
+                opacity: 0.8
+                gradient: Gradient {
+                    GradientStop { position: 0.0; color: "#000" }
+                    GradientStop { position: 0.9; color: "#666" }
+                    GradientStop { position: 1.0; color: "#AAA" }
+                }
+                radius: 10
+                border.color: 'black'
+                border.width: 1
+                anchors.centerIn: parent
+                width: parent.width * 1.1
+                height: parent.contentHeight
+            }
+        }
+
         Rectangle {
             id: container
             color: "transparent"
@@ -211,13 +239,14 @@ ActivityBase {
 
         Bar {
             id: bar
-            content: BarEnumContent { value: help | home | level }
+            content: BarEnumContent { value: help | home | level | hint }
             onHelpClicked: {
                 displayDialog(dialogHelp)
             }
             onPreviousLevelClicked: Activity.previousLevel()
             onNextLevelClicked: Activity.nextLevel()
             onHomeClicked: activity.home()
+            onHintClicked: hints.visible = !hints.visible
         }
 
         Bonus {
