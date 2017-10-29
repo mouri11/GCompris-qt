@@ -27,5 +27,4 @@ import "../ascending_order"
 Ascending_order {
     id: activity
     mode: "alphabets"
-    content: BarEnumContent {value: help | home | level | hint }
 }
