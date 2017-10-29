@@ -51,6 +51,7 @@ ActivityBase {
             property Item main: activity.main
             property alias background: background
             property alias bar: bar
+            property alias content: bar.content
             property alias bonus: bonus
             property alias boxes: boxes
             property alias flow: flow
@@ -241,14 +242,13 @@ ActivityBase {
 
         Bar {
             id: bar
-            content: BarEnumContent { value: help | home | level | hint }
+            content: BarEnumContent { value: help | home | level }
             onHelpClicked: {
                 displayDialog(dialogHelp)
             }
             onPreviousLevelClicked: Activity.previousLevel()
             onNextLevelClicked: Activity.nextLevel()
             onHomeClicked: activity.home()
-            onHintClicked: hints.visible = !hints.visible
         }
 
         Bonus {
