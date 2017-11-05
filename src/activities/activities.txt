@@ -108,18 +108,13 @@ money_back
 money_back_cents
 money_cents
 mosaic
-<<<<<<< HEAD
 nine_men_morris
 nine_men_morris_2players
 number_sequence
-=======
-note_names
->>>>>>> b6323e0b462ed6c85062a4c236177149257433f2
 numbers-odd-even
 paintings
 penalty
 photo_hunter
-piano_composition
 planegame
 readingh
 readingv
