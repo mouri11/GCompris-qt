@@ -90,16 +90,12 @@ function initLevel() {
 
 function nextLevel() {
     items.staff2.eraseAllNotes()
-    if(numberOfLevel <= ++currentLevel) {
-        currentLevel = 0
-    }
+    currentLevel = ++currentLevel % numberOfLevel
     initLevel();
 }
 
 function previousLevel() {
     items.staff2.eraseAllNotes()
-    if(--currentLevel < 0) {
-        currentLevel = numberOfLevel - 1
-    }
+    currentLevel = --currentLevel < 0 ?  numberOfLevel - 1: currentLevel
     initLevel();
 }
