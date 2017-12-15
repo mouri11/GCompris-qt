@@ -1,9 +1,6 @@
-/* GCompris - family_find_relative.qml
+/* GCompris - MemoryCaseAssociationTux.qml
  *
- * Copyright (C) 2017 RUDRA NIL BASU <rudra.nil.basu.1996@gmail.com>
- *
- * Authors:
- *   RUDRA NIL BASU <rudra.nil.basu.1996@gmail.com>
+ * Copyright (C) 2017 Aman Kumar Gupta <gupta2140@gmail.com>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
@@ -20,11 +17,11 @@
  */
 import QtQuick 2.6
 
-import "../../core"
-import "../family"
+import "../memory"
+import "../memory-case-association/dataset.js" as Dataset
 
-Family {
-    id: activity
-
-    property string mode: "find_relative"
+MemoryCommon {
+    dataset: Dataset.get()
+    backgroundImg: "qrc:/gcompris/src/activities/memory/resource/background.svg"
+    withTux: true
 }
