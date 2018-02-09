@@ -81,6 +81,7 @@ louis-braille
 magic-hat-minus
 magic-hat-plus
 maze
+maze-3D
 mazeinvisible
 mazerelative
 melody
