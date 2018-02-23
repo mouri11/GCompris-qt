@@ -25,70 +25,70 @@ QtObject {
     property var zero: {
         'imageName': 'zero.svg',
         'componentSource': 'Zero.qml',
-        'width': 0.12,
+        'width': 0.2,
         'height': 0.2,
         'toolTipText': qsTr("Zero input")
     }
     property var one: {
         'imageName': 'one.svg',
         'componentSource': 'One.qml',
-        'width': 0.12,
+        'width': 0.2,
         'height': 0.2,
         'toolTipText': qsTr("One input")
     }
     property var digitalLight: {
         'imageName': 'DigitalLightOff.svg',
         'componentSource': 'DigitalLight.qml',
-        'width': 0.12,
-        'height': 0.12,
+        'width': 0.2,
+        'height': 0.2,
         'toolTipText': qsTr("Digital light")
     }
     property var andGate: {
         'imageName': 'gateAnd.svg',
         'componentSource': 'AndGate.qml',
         'width': 0.15,
-        'height': 0.12,
+        'height': 0.15,
         'toolTipText': qsTr("AND gate")
     }
     property var orGate: {
         'imageName': 'gateOr.svg',
         'componentSource': 'OrGate.qml',
         'width': 0.15,
-        'height': 0.12,
+        'height': 0.15,
         'toolTipText': qsTr("OR gate")
     }
     property var notGate: {
         'imageName': 'gateNot.svg',
         'componentSource': 'NotGate.qml',
         'width': 0.15,
-        'height': 0.12,
+        'height': 0.15,
         'toolTipText': qsTr("NOT gate")
     }
     property var xorGate: {
         'imageName': 'gateXor.svg',
         'componentSource': 'XorGate.qml',
         'width': 0.15,
-        'height': 0.12,
+        'height': 0.15,
         'toolTipText': qsTr("XOR gate")
     }
     property var nandGate: {
         'imageName': 'gateNand.svg',
         'componentSource': 'NandGate.qml',
         'width': 0.15,
-        'height': 0.12,
+        'height': 0.15,
         'toolTipText': qsTr("NAND gate")
     }
     property var norGate: {
         'imageName': 'gateNor.svg',
         'componentSource': 'NorGate.qml',
         'width': 0.15,
-        'height': 0.12,
+        'height': 0.15,
         'toolTipText': qsTr("NOR gate")
     }
     property var switchKey: {
         'imageName': 'switchOff.svg',
         'componentSource': 'Switch.qml',
-        'width': 0.18,
+        'width': 0.15,
         'height': 0.15,
         'toolTipText': qsTr("Switch")
     }
@@ -96,7 +96,7 @@ QtObject {
         'imageName': 'comparator.svg',
         'componentSource': 'Comparator.qml',
         'width': 0.3,
-        'height': 0.25,
+        'height': 0.2,
         'toolTipText': qsTr("Comparator")
     }
     property var bcdToSevenSegment: {
@@ -109,21 +109,21 @@ QtObject {
     property var sevenSegmentDisplay: {
         'imageName': 'sevenSegmentDisplay.svg',
         'componentSource': 'SevenSegment.qml',
-        'width': 0.18,
+        'width': 0.225,
         'height': 0.4,
         'toolTipText': qsTr("7 segment display")
     }
     property var signalGenerator: {
         'imageName': 'signalGenerator.svg',
         'componentSource': 'SignalGenerator.qml',
-        'width': 0.25,
-        'height': 0.18,
+        'width': 0.3,
+        'height': 0.2,
         'toolTipText': qsTr("Signal generator")
     }
     property var bcdCounter: {
         'imageName': 'bcdCounter.svg',
         'componentSource': 'BcdCounter.qml',
-        'width': 0.3,
+        'width': 0.225,
         'height': 0.4,
         'toolTipText': qsTr("BCD counter")
     }
@@ -190,8 +190,8 @@ QtObject {
             playAreaComponentList: [zero, one, orGate, andGate, digitalLight],
             determiningComponentsIndex: [4],
             wires: [ [0, 0, 2, 0], [2, 0, 3, 0], [3, 0, 4, 0]],
-            playAreaComponentPositionX: [0.2, 0.3, 0.4, 0.6, 0.8],
-            playAreaComponentPositionY: [0.1, 0.4, 0.3, 0.3, 0.4],
+            playAreaComponentPositionX: [0.2, 0.2, 0.4, 0.6, 0.8],
+            playAreaComponentPositionY: [0.1, 0.5, 0.3, 0.3, 0.4],
             type: [problemType.lightTheBulb],
             introMessage: [
                 qsTr("Note: You can draw multiple wires from the output terminal of a component.")
@@ -221,7 +221,7 @@ QtObject {
             type: [problemType.lightTheBulb],
             introMessage: [
                 qsTr("The NAND gate takes two binary inputs and produces one binary output."),
-                qsTr("The output of the NAND gate will be zero if the both the inputs are \"1\". Else, the output will be one."),
+                qsTr("The output of the NAND gate will be zero if both of its inputs are \"1\". Else, the output will be one."),
                 qsTr("For a more detailed description about the gate, select it and click on the info button."),
                 qsTr("Light the bulb using the NAND gate provided.")
             ]
@@ -285,7 +285,7 @@ QtObject {
             playAreaComponentPositionY: [0.5, 0.5],
             type: [problemType.lightTheBulb],
             introMessage: [
-                qsTr("A NOR gate takes 2 binary input and outputs 1 if both of them are 0, otherwise produces an output of 1."),
+                qsTr("A NOR gate takes 2 binary input and outputs 1 if both of them are 0, otherwise produces an output of 0."),
                 qsTr("For a more detailed description about the gate, select it and click on the info button."),
                 qsTr("Light the bulb using the NOR gate provided.")
             ]
