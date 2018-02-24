@@ -87,7 +87,7 @@ endif("${CMAKE_BINARY_DIR}" STREQUAL "${CMAKE_SOURCE_DIR}")
 set(QT_REQUIRED_VERSION 5.6.0)
 
 find_package(Qt5 ${QT_REQUIRED_VERSION} REQUIRED
-            Qml Quick Gui Multimedia Core Svg Xml XmlPatterns LinguistTools Sensors)
+            Qml Quick Gui Multimedia Core Svg Xml XmlPatterns LinguistTools Sensors 3DCore 3DExtras 3DRender 3DInput)
 
 find_package (KF5 QUIET COMPONENTS
     DocTools
