@@ -36,5 +36,5 @@ ActivityInfo {
   manual: ""
   credit: ""
   section: "discovery maze"
-  createdInVersion: 
+  createdInVersion: 0
 }
