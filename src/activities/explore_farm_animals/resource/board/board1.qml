@@ -53,7 +53,7 @@ QtObject {
         {
             "image": "qrc:/gcompris/src/activities/explore_farm_animals/resource/animals/cow.svg",
             "title": qsTr("Cow"),
-            "text": qsTr("The cow goes 'moo. moo.'. Cows are herbivorous mammals. They graze all day in the meadow."),
+            "text": qsTr("The cow goes 'moo! moo!'. Cows are herbivorous mammals. They graze all day in the meadow."),
             "audio": GCompris.ApplicationInfo.getAudioFilePath("qrc:/gcompris/src/activities/explore_farm_animals/resource/animals/cow.$CA"),
             "image2": "qrc:/gcompris/src/activities/explore_farm_animals/resource/animals/cow.jpg",
             "text2": qsTr("You can drink the milk this animal produces."),
@@ -150,7 +150,7 @@ QtObject {
 
     property var instructions : [
         {
-            "text": qsTr("Click on the questions to explore each farm animal.")
+            "text": qsTr("Click on each farm animal to discover them.")
         },
         {
             "text": qsTr("Click on the farm animal that makes the sound you hear.")

@@ -64,9 +64,11 @@ ActivityBase {
             }
             if ((event.key == Qt.Key_W || event.key == Qt.Key_Up) && !tutorial.visible) {
                 centralBallastTank.fillBallastTanks()
+                controls.updateVannes(centralBallastTank.waterFilling, controls.rotateCentralFill)
             }
             if ((event.key == Qt.Key_S || event.key == Qt.Key_Down) && !tutorial.visible) {
                 centralBallastTank.flushBallastTanks()
+                controls.updateVannes(centralBallastTank.waterFlushing, controls.rotateCentralFlush)
             }
             if ((event.key == Qt.Key_Plus) && !tutorial.visible) {
                 submarine.increaseWingsAngle(1)
@@ -77,16 +79,20 @@ ActivityBase {
 
             if ((event.key == Qt.Key_R) && !tutorial.visible) {
                 leftBallastTank.fillBallastTanks()
+                controls.updateVannes(leftBallastTank.waterFilling, controls.rotateLeftFill)
             }
             if ((event.key == Qt.Key_F) && !tutorial.visible) {
                 leftBallastTank.flushBallastTanks()
+                controls.updateVannes(leftBallastTank.waterFlushing, controls.rotateLeftFlush)
             }
 
             if ((event.key == Qt.Key_T) && !tutorial.visible) {
                 rightBallastTank.fillBallastTanks()
+                controls.updateVannes(rightBallastTank.waterFilling, controls.rotateRightFill)
             }
             if ((event.key == Qt.Key_G) && !tutorial.visible) {
                 rightBallastTank.flushBallastTanks()
+                controls.updateVannes(rightBallastTank.waterFlushing, controls.rotateRightFlush)
             }
         }
 
@@ -111,6 +117,7 @@ ActivityBase {
             property alias tutorial: tutorial
             property alias upperGate: upperGate
             property alias ship: ship
+            property alias controls: controls
             property alias physicalWorld: physicalWorld
             property bool processingAnswer: false
         }
@@ -359,7 +366,7 @@ ActivityBase {
                 property int totalWaterLevel: bar.level < 7 ? centralBallastTank.maxWaterLevel : leftBallastTank.maxWaterLevel + rightBallastTank.maxWaterLevel
 
                 width: background.width / 9
-                sourceSize.width: width
+                sourceSize.width: submarineImage.width
                 fillMode: Image.PreserveAspectFit
 
                 function reset() {
@@ -619,9 +626,9 @@ ActivityBase {
             id: crown
 
             width: submarineImage.width * 0.85
-            height: width * 0.5
-            sourceSize.width: width
-            sourceSize.height: height
+            height: crown.width * 0.5
+            sourceSize.width: crown.width
+            sourceSize.height: crown.height
             visible: ((bar.level > 2) && !isCaptured) ? true : false
             source: url + "crown.svg"
 
@@ -679,7 +686,7 @@ ActivityBase {
             id: ship
 
             width: background.width / 9
-            sourceSize.width: width
+            sourceSize.width: ship.width
             fillMode: Image.PreserveAspectFit
 
             visible: (bar.level > 3) ? true : false
@@ -772,7 +779,7 @@ ActivityBase {
         Image {
             id: rock2
             width: background.width / 6
-            height: width * 0.48
+            height: rock2.width * 0.48
             z: 5
 
             visible: (bar.level > 4) ? true : false
@@ -824,7 +831,7 @@ ActivityBase {
         Image {
             id: rock1
             width: rock2.width
-            height: width * 0.46
+            height: rock2.width * 0.46
             z: 5
             visible: (bar.level > 6) ? true : false
             anchors.bottom: crown.bottom
@@ -867,8 +874,8 @@ ActivityBase {
             id: rock3
             width: background.width 
             height: background.height * 0.25
-            sourceSize.width: width
-            sourceSize.height: height
+            sourceSize.width: rock3.width
+            sourceSize.height: rock3.height
 
             visible: (bar.level > 2) ? true : false
             anchors.top: crown.top
@@ -896,27 +903,27 @@ ActivityBase {
         Controls {
             id: controls
             z: 10
-            enginePosition.x: background.width * 0.2
-            enginePosition.y: background.height - bar.height - (engineHeight * 1.6)
+            enginePosition.x: background.width * 0.1
+            enginePosition.y: background.height * 0.64
             engineWidth: background.width / 8
             engineHeight: 100
             submarineHorizontalSpeed: submarine.currentFinalVelocity * 1000
 
             leftTankVisible: bar.level >= 7 ? true : false
-            leftBallastTankPosition.x: background.width * 0.4
-            leftBallastTankPosition.y: background.height - bar.height - (engineHeight * 1.6)
+            leftBallastTankPosition.x: background.width * 0.35
+            leftBallastTankPosition.y: enginePosition.y
             leftBallastTankWidth: background.width / 8
             leftBallastTankHeight: 120
 
             centralTankVisible:  bar.level < 7 ? true : false
-            centralBallastTankPosition.x: background.width * 0.5
-            centralBallastTankPosition.y: background.height - bar.height - (engineHeight * 1.6)
+            centralBallastTankPosition.x: background.width * 0.45
+            centralBallastTankPosition.y: enginePosition.y
             centralBallastTankWidth: background.width / 8
             centralBallastTankHeight: 120
 
             rightTankVisible:  bar.level >= 7 ? true : false
-            rightBallastTankPosition.x: background.width * 0.6
-            rightBallastTankPosition.y: background.height - bar.height - (engineHeight * 1.6)
+            rightBallastTankPosition.x: background.width * 0.55
+            rightBallastTankPosition.y: enginePosition.y
             rightBallastTankWidth: background.width / 8
             rightBallastTankHeight: 120
 
