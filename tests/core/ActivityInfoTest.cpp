@@ -22,6 +22,7 @@
 #include <QtTest>
 #include <QObject>
 
+#include "ApplicationSettingsMock.h"
 #include "src/core/ActivityInfo.h"
 
 #define ACTIVITY_INFO_TEST_ATTRIBUTE(attributeName, accessorName, attributeType) \
@@ -40,6 +41,8 @@ class CoreActivityInfoTest : public QObject
 private slots:
     void ActivityInfoTest();
     void ActivityInfoTest_data();
+    void getSectionPathTest();
+    void setNameWithKioskMode();
 };
 
 void CoreActivityInfoTest::ActivityInfoTest_data()
@@ -60,14 +63,17 @@ void CoreActivityInfoTest::ActivityInfoTest_data()
     QTest::addColumn<bool>("enabled");
     QTest::addColumn<int>("createdInVersion");
 
-    QTest::newRow("ActivityInfo") << "Name" << "section" << (unsigned int)3 << "icon" << "author" << true << "title" << "description" << "goal" << "prerequisite" << "manual" << "credit" << false << false << 2 ;
-    QTest::newRow("UnknownInfo") << "Unknown" << "Unknown" << (unsigned int)5 << "Unknown" << "Unknown" << false << "Unknown" << "Unknown" << "Unknown" << "Unknown" << "Unknown" << "Unknown" << true << true << 10 ;
-    QTest::newRow("Empty") << "" << "" << (unsigned int)0 << "" << "" << false << "" << "" << "" << "" << "" << "" << true << true << 0 ;
+    QTest::newRow("ActivityInfo") << "Name" << "section" << (unsigned int)3 << "icon" << "author" << true << "title" << "description" << "goal" << "prerequisite" << "manual" << "credit" << false << false << 2;
+    QTest::newRow("UnknownInfo") << "Unknown" << "Unknown" << (unsigned int)5 << "Unknown" << "Unknown" << false << "Unknown" << "Unknown" << "Unknown" << "Unknown" << "Unknown" << "Unknown" << true << true << 10;
+    QTest::newRow("Empty") << "" << "" << (unsigned int)0 << "" << "" << false << "" << "" << "" << "" << "" << "" << true << true << 0;
 }
 
 void CoreActivityInfoTest::ActivityInfoTest()
 {
     ActivityInfo activityinfo;
+
+    // called here to set the static instance object to the mock one
+    ApplicationSettingsMock::getInstance();
 
     QCOMPARE(activityinfo.name(), QStringLiteral(""));
     QCOMPARE(activityinfo.section(), QStringLiteral(""));
@@ -99,6 +105,44 @@ void CoreActivityInfoTest::ActivityInfoTest()
     ACTIVITY_INFO_TEST_ATTRIBUTE(favorite, Favorite, bool);
     ACTIVITY_INFO_TEST_ATTRIBUTE(enabled, Enabled, bool);
     ACTIVITY_INFO_TEST_ATTRIBUTE(createdInVersion, CreatedInVersion, int);
+
+    delete ApplicationSettingsMock::getInstance();
+}
+
+void CoreActivityInfoTest::getSectionPathTest()
+{
+    ActivityInfo parent;
+    parent.setSection("parent");
+    ActivityInfo child(&parent);
+    child.setSection("child");
+    QStringList sectionPath = child.getSectionPath();
+
+    QCOMPARE(sectionPath.size(), 2);
+    QCOMPARE(sectionPath.join('/'), QStringLiteral("parent/child"));
+}
+
+void CoreActivityInfoTest::setNameWithKioskMode()
+{
+    const QString fakeActivity = QStringLiteral("fakeActivity");
+    ActivityInfo activityInfo;
+    activityInfo.setFavorite(true);
+    ApplicationSettingsMock::getInstance()->setKioskMode(true);
+    ApplicationSettingsMock::getInstance()->setFavorite(fakeActivity, false);
+    activityInfo.setName(fakeActivity);
+    // in kiosk mode, we don't retrieve the favorite to always have a clean start
+    QVERIFY(activityInfo.favorite());
+
+    ApplicationSettingsMock::getInstance()->setKioskMode(false);
+    activityInfo.setName(fakeActivity);
+    // the activity is not a favorite, we remove its flag when setting the name
+    QVERIFY(!activityInfo.favorite());
+
+    ApplicationSettingsMock::getInstance()->setFavorite(fakeActivity, true);
+    activityInfo.setName(fakeActivity);
+    // the activity is a favorite, we add its flag when setting the name
+    QVERIFY(activityInfo.favorite());
+
+    delete ApplicationSettingsMock::getInstance();
 }
 
 QTEST_MAIN(CoreActivityInfoTest)

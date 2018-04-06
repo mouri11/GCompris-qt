@@ -60,7 +60,7 @@ ActivityBase {
             id: items
             property Item main: activity.main
             property alias background: background
-            property GCAudio audioEffects: activity.audioEffects
+            property GCSfx audioEffects: activity.audioEffects
             property alias bar: bar
             property alias bonus: bonus
             property alias hat: theHat
@@ -101,7 +101,7 @@ ActivityBase {
 
             GCText {
                 //: The math operation
-                text: mode == "minus" ? qsTr("-") : qsTr("+")
+                text: mode == "minus" ? qsTr("−") : qsTr("+")
                 anchors.right: mainlayout.right
                 anchors.rightMargin: 10
                 y: secondRow.y

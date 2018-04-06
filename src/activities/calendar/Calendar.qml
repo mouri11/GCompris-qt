@@ -102,7 +102,7 @@ ActivityBase {
             anchors.centerIn: calendarBox
             frameVisible: true
             focus: !answerChoices.visible
-            __locale: Qt.locale(ApplicationSettings.locale)
+            __locale: Qt.locale(ApplicationInfo.localeShort)
             style: CalendarStyle {
                 navigationBar: Rectangle {
                     height: calendar.height * 0.12
@@ -120,7 +120,7 @@ ActivityBase {
                         source: "qrc:/gcompris/src/core/resource/scroll_down.svg"
                         rotation: 90
                         visible: ((calendar.visibleYear + calendar.visibleMonth) > Activity.minRange) ? true : false
-                        onClicked: control.__selectPreviousMonth()
+                        onClicked: calendar.showPreviousMonth()
                     }
                     GCText {
                         id: dateText
@@ -146,7 +146,7 @@ ActivityBase {
                         source: "qrc:/gcompris/src/core/resource/scroll_down.svg"
                         rotation: 270
                         visible: ((calendar.visibleYear + calendar.visibleMonth) < Activity.maxRange) ? true : false
-                        onClicked: control.__selectNextMonth()
+                        onClicked: calendar.showNextMonth()
                     }
                 }
                 dayDelegate: Rectangle {
