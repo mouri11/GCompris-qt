@@ -290,20 +290,22 @@ function createWord()
 
         var word
 
-        if(items.ourActivity.getImage(text)) {
+        var modText = parseInt(text) % items.numberLimit + ""
+
+        if(items.ourActivity.getImage(modText)) {
             word = wordComponent.createObject( items.background,
                 {
-                    "text": text,
-                    "image": items.ourActivity.getImage(text),
+                    "text": modText,
+                    "image": items.ourActivity.getImage(modText),
                     // assume x=width-25px for now, Word auto-adjusts onCompleted():
                     "x": Math.random() * (items.main.width - 25),
                     "y": -25,
                 });
-        } else if(items.ourActivity.getDominoValues(text).length) {
+        } else if(items.ourActivity.getDominoValues(modText).length) {
             word = wordComponent.createObject( items.background,
                 {
-                    "text": text,
-                    "dominoValues": items.ourActivity.getDominoValues(text),
+                    "text": modText,
+                    "dominoValues": items.ourActivity.getDominoValues(modText),
                     // assume x=width-25px for now, Word auto-adjusts onCompleted():
                     "x": Math.random() * (items.main.width - 25),
                     "y": -25,

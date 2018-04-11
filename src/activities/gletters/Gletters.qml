@@ -21,6 +21,7 @@
  */
 
 import QtQuick 2.6
+import QtQuick.Controls 1.5
 import GCompris 1.0
 
 import "../../core"
@@ -88,6 +89,7 @@ ActivityBase {
             property alias bar: bar
             property alias bonus: bonus
             property alias wordlist: wordlist
+            property int numberLimit: 3
             property alias score: score
             property alias keyboard: keyboard
             property alias wordDropTimer: wordDropTimer
@@ -127,6 +129,7 @@ ActivityBase {
                 Item {
                     property alias localeBox: localeBox
                     property alias uppercaseBox: uppercaseBox
+                    property alias numberLimitSlider: numberLimitSlider
                     height: column.height
 
                     property alias availableLangs: langs.languages
@@ -155,6 +158,31 @@ ActivityBase {
                             text: qsTr("Uppercase only mode")
                             checked: activity.uppercaseOnly
                         }
+                        Flow {
+                            spacing: 5
+                            width: dialogActivityConfig.width
+                            GCSlider {
+                                id: numberLimitSlider
+                                width: 250 * ApplicationInfo.ratio
+                                maximumValue: 20
+                                minimumValue: 3
+                                value: items.numberLimit
+                                //onValueChanged: items.numberLimit = value;
+                                scrollEnabled: false
+                            }
+                            GCText {
+                                id: numberLimitText
+                                text: qsTr("Number Limit")
+                                fontSize: mediumSize
+                                wrapMode: Text.WordWrap
+                            }
+                            Button {
+                                height: 30 * ApplicationInfo.ratio
+                                text: qsTr("Default");
+                                style: GCButtonStyle {}
+                                onClicked: numberLimitSlider.value = 3.0
+                            }
+                        }
                     }
                 }
             }
@@ -164,6 +192,7 @@ ActivityBase {
                 if(dataToSave && dataToSave["locale"]) {
                     background.locale = dataToSave["locale"];
                     activity.uppercaseOnly = dataToSave["uppercaseMode"] === "true" ? true : false;
+                    items.numberLimit = dataToSave["numberLimit"];
                 }
             }
             onSaveData: {
@@ -176,7 +205,11 @@ ActivityBase {
 
                 var oldUppercaseMode = activity.uppercaseOnly
                 activity.uppercaseOnly = dialogActivityConfig.configItem.uppercaseBox.checked
-                dataToSave = {"locale": newLocale, "uppercaseMode": ""+activity.uppercaseOnly}
+
+                var oldNumberLimit = items.numberLimit
+                items.numberLimit = dialogActivityConfig.configItem.numberLimitSlider.value
+
+                dataToSave = {"locale": newLocale, "uppercaseMode": ""+activity.uppercaseOnly, "numberLimit": items.numberLimit}
 
                 background.locale = newLocale;
                 // Restart the activity with new information
