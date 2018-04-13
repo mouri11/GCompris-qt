@@ -29,6 +29,7 @@ Gletters {
     id: activity
 
     mode: "letter"
+    useNumberLimit: true
     dataSetUrl: "qrc:/gcompris/src/activities/smallnumbers/resource/"
     configurationButtonVisible: true
 

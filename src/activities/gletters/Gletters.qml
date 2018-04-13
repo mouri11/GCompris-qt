@@ -41,6 +41,9 @@ ActivityBase {
     /* mode of the activity, "letter" (gletters) or "word" (wordsgame):*/
     property string mode: "letter"
 
+    // To show or hide numberLimit config option
+    property bool useNumberLimit: false
+
     // Override if you want to replace texts by your image
     function getImage(key) {
         return ""
@@ -159,15 +162,15 @@ ActivityBase {
                             checked: activity.uppercaseOnly
                         }
                         Flow {
+                            visible: activity.useNumberLimit
                             spacing: 5
                             width: dialogActivityConfig.width
                             GCSlider {
                                 id: numberLimitSlider
                                 width: 250 * ApplicationInfo.ratio
-                                maximumValue: 20
+                                maximumValue: 10
                                 minimumValue: 3
                                 value: items.numberLimit
-                                //onValueChanged: items.numberLimit = value;
                                 scrollEnabled: false
                             }
                             GCText {
