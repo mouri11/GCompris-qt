@@ -173,12 +173,12 @@ ActivityBase {
                                 maximumValue: 10
                                 minimumValue: 3
                                 value: items.numberLimit
-                                onValueChanged: numberLimitText.text = qsTr("Maximum Number Limit: " + value)
+                                onValueChanged: numberLimitText.text
                                 scrollEnabled: false
                             }
                             GCText {
                                 id: numberLimitText
-                                text: qsTr("Maximum Number Limit: " + numberLimitSlider.value)
+                                text: qsTr("Maximum Number Limit: %1").arg(numberLimitSlider.value)
                                 fontSize: mediumSize
                                 wrapMode: Text.WordWrap
                             }
