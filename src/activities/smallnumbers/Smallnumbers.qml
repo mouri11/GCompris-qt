@@ -29,9 +29,12 @@ Gletters {
     id: activity
 
     mode: "letter"
-    useNumberLimit: true
+    useConfig: {
+        "useNumberLimit": true,
+        "useUpperCaseBox": false
+    }
+
     dataSetUrl: "qrc:/gcompris/src/activities/smallnumbers/resource/"
-    configurationButtonVisible: true
 
     function getImage(key) {
         return dataSetUrl + "dice" + key + ".svg"

@@ -29,9 +29,11 @@ Gletters {
     id: activity
 
     mode: "letter"
-    useNumberLimit: true
+    useConfig: {
+        "useNumberLimit": true,
+        "useUpperCaseBox": false
+    }
     dataSetUrl: "qrc:/gcompris/src/activities/smallnumbers2/resource/"
-    configurationButtonVisible: true
 
     function getDominoValues(key) {
         var val1 = Math.floor(Math.random() * key)

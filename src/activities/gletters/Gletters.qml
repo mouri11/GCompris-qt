@@ -33,16 +33,17 @@ ActivityBase {
     // Overload this in your activity to change it
     // Put you default-<locale>.json files in it
     property string dataSetUrl: "qrc:/gcompris/src/activities/gletters/resource/"
-    /* no need to display the configuration button for smallnumbers */
-    property bool configurationButtonVisible: true
 
     property bool uppercaseOnly: false
 
     /* mode of the activity, "letter" (gletters) or "word" (wordsgame):*/
     property string mode: "letter"
 
-    // To show or hide numberLimit config option
-    property bool useNumberLimit: false
+    // To show or hide a config option
+    property var useConfig: {
+        "useNumberLimit": false,
+        "useUpperCaseBox": true
+    }
 
     // Override if you want to replace texts by your image
     function getImage(key) {
@@ -157,12 +158,13 @@ ActivityBase {
                         }
                         GCDialogCheckBox {
                             id: uppercaseBox
+                            visible: activity.useConfig["useUpperCaseBox"]
                             width: dialogActivityConfig.width
                             text: qsTr("Uppercase only mode")
                             checked: activity.uppercaseOnly
                         }
                         Flow {
-                            visible: activity.useNumberLimit
+                            visible: activity.useConfig["useNumberLimit"]
                             spacing: 5
                             width: dialogActivityConfig.width
                             GCSlider {
@@ -171,11 +173,12 @@ ActivityBase {
                                 maximumValue: 10
                                 minimumValue: 3
                                 value: items.numberLimit
+                                onValueChanged: numberLimitText.text = qsTr("Maximum Number Limit: " + value)
                                 scrollEnabled: false
                             }
                             GCText {
                                 id: numberLimitText
-                                text: qsTr("Number Limit")
+                                text: qsTr("Maximum Number Limit: " + numberLimitSlider.value)
                                 fontSize: mediumSize
                                 wrapMode: Text.WordWrap
                             }
@@ -246,7 +249,7 @@ ActivityBase {
         Bar {
             id: bar
             anchors.bottom: keyboard.top
-            content: BarEnumContent { value: configurationButtonVisible ? (help | home | level | config) : (help | home | level)}
+            content: BarEnumContent { value: (help | home | level | config)}
             onHelpClicked: {
                 displayDialog(dialogHelp)
             }
